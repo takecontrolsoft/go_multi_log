@@ -63,7 +63,10 @@ func TestAllLogs(t *testing.T) {
 }
 
 func TestLogFormattedObject(t *testing.T) {
+	oldLevel := logger.DefaultLogger().GetLevel()
 	logger.DefaultLogger().SetLevel(levels.All)
+	defer logger.DefaultLogger().SetLevel(oldLevel)
+
 	content := readConsole(func() {
 		person := person{Name: "Michael"}
 		logger.DebugF("Person: %v, Car: %v", person, car{Year: "2020"})
@@ -81,7 +84,10 @@ func TestLogFormattedObject(t *testing.T) {
 }
 
 func TestLogLevels(t *testing.T) {
+	oldLevel := logger.DefaultLogger().GetLevel()
 	logger.DefaultLogger().SetLevel(levels.Trace)
+	defer logger.DefaultLogger().SetLevel(oldLevel)
+
 	content := readConsole(func() {
 		logger.Debug("Test debug log message")
 		logger.Trace("Test trace log message")
@@ -115,11 +121,14 @@ func TestStopLog(t *testing.T) {
 
 func TestCustomizedConsoleLog(t *testing.T) {
 	logger.DefaultLogger().Stop()
+	defer logger.DefaultLogger().Start()
 	c := loggers.NewConsoleLogger(levels.Debug, "console:***debug:'%s'")
-	_, err := logger.RegisterLogger("debug_log", c)
+	_, err := logger.RegisterLogger("debug_log_key", c)
 	if err != nil {
 		t.Fatal(err)
 	}
+	defer logger.UnregisterLogger("debug_log_key")
+
 	assert.Equal(t, c.Level, levels.Debug)
 	assert.Equal(t, logger.GetLogger("debug_log").GetLevel(), c.Level)
 	content := readConsole(func() {
@@ -133,10 +142,12 @@ func TestCustomizedConsoleLog(t *testing.T) {
 
 func TestAddFileLog(t *testing.T) {
 	fileLogger := loggers.NewFileLoggerDefault()
-	_, err := logger.RegisterLogger("file", fileLogger)
+	_, err := logger.RegisterLogger("file_log_key", fileLogger)
 	if err != nil {
 		t.Fatal(err)
 	}
+	defer logger.UnregisterLogger("file_log_key")
+
 	logger.Info("Test log info message")
 
 	pattern := fmt.Sprintf("%s*%s", fileLogger.FileOptions.FilePrefix, fileLogger.FileOptions.FileExtension)
@@ -166,7 +177,10 @@ func TestCustomizedFileLog(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+	defer logger.UnregisterLogger("file_log_key")
+
 	logger.DefaultLogger().Stop()
+	defer logger.DefaultLogger().Stop()
 	assert.Equal(t, fileLogger.Level, level)
 	assert.Equal(t, logger.GetLogger(key).GetLevel(), fileLogger.Level)
 	logger.Error("Test log error message")
