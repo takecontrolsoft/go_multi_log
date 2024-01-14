@@ -22,30 +22,42 @@ import (
 	"github.com/takecontrolsoft/go_multi_log/logger/levels"
 )
 
+// [ConsoleLogger] type represents the logger that print
+// the messages to the standard output [os.Stdout].
 type ConsoleLogger struct {
 	LoggerType
 }
 
+// Returns an instance of [ConsoleLogger] with
+// default log level "Info".
 func NewConsoleLoggerDefault() *ConsoleLogger {
 	return &ConsoleLogger{
-		LoggerType: LoggerType{Level: levels.InfoLevel},
+		LoggerType: LoggerType{Level: levels.Info},
 	}
 }
 
-func NewConsoleLogger(level int, format string) *ConsoleLogger {
+// Returns an instance of [ConsoleLogger] with
+// given log level and format string defined by the caller.
+func NewConsoleLogger(level levels.LogLevel, format string) *ConsoleLogger {
 	return &ConsoleLogger{
 		LoggerType: LoggerType{Level: level, Format: format},
 	}
 }
 
-func (logger *ConsoleLogger) Log(level int, arg any) {
+// Prints the message or the object "arg" into the console.
+// If there is no format set when initializing this [ConsoleLogger],
+// a default format is used: {time} {log level}: [{message}]
+func (logger *ConsoleLogger) Log(level levels.LogLevel, arg any) {
 	if logger.IsLogAllowed(level) {
 		log.SetOutput(os.Stdout)
 		logger.multi_log(level, arg)
 	}
 }
 
-func (logger *ConsoleLogger) LogF(level int, format string, args ...interface{}) {
+// Prints one or more objects "args" into the console
+// as a message formatted using the given format string
+// by the caller.
+func (logger *ConsoleLogger) LogF(level levels.LogLevel, format string, args ...interface{}) {
 	if logger.IsLogAllowed(level) {
 		log.SetOutput(os.Stdout)
 		logger.multi_logF(level, format, args...)

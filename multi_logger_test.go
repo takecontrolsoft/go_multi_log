@@ -63,7 +63,10 @@ func TestAllLogs(t *testing.T) {
 }
 
 func TestLogFormattedObject(t *testing.T) {
-	logger.DefaultLogger().SetLevel(levels.AllLevels)
+	oldLevel := logger.DefaultLogger().GetLevel()
+	logger.DefaultLogger().SetLevel(levels.All)
+	defer logger.DefaultLogger().SetLevel(oldLevel)
+
 	content := readConsole(func() {
 		person := person{Name: "Michael"}
 		logger.DebugF("Person: %v, Car: %v", person, car{Year: "2020"})
@@ -81,7 +84,10 @@ func TestLogFormattedObject(t *testing.T) {
 }
 
 func TestLogLevels(t *testing.T) {
-	logger.DefaultLogger().SetLevel(levels.TraceLevel)
+	oldLevel := logger.DefaultLogger().GetLevel()
+	logger.DefaultLogger().SetLevel(levels.Trace)
+	defer logger.DefaultLogger().SetLevel(oldLevel)
+
 	content := readConsole(func() {
 		logger.Debug("Test debug log message")
 		logger.Trace("Test trace log message")
@@ -113,12 +119,37 @@ func TestStopLog(t *testing.T) {
 	assert.Contains(t, content, "INFO: [Test info log message 2]")
 }
 
-func TestAddFileLog(t *testing.T) {
-	fileLogger := loggers.NewFileLoggerDefault()
-	_, err := logger.RegisterLogger("file", fileLogger)
+func TestCustomizedConsoleLog(t *testing.T) {
+	logger.DefaultLogger().Stop()
+	defer logger.DefaultLogger().Start()
+	c := loggers.NewConsoleLogger(levels.Debug, "console:***debug:'%s'")
+	key := "debug_log_key"
+	err := logger.RegisterLogger(key, c)
 	if err != nil {
 		t.Fatal(err)
 	}
+	defer logger.UnregisterLogger(key)
+
+	assert.Equal(t, c.Level, levels.Debug)
+	assert.Equal(t, logger.GetLogger(key).GetLevel(), c.Level)
+	content := readConsole(func() {
+		logger.Debug("Test log debug message")
+		logger.Info("Test log info message")
+	})
+
+	assert.NotContains(t, content, "Test info log message")
+	assert.Contains(t, content, "console:***debug:'Test log debug message'")
+}
+
+func TestAddFileLog(t *testing.T) {
+	fileLogger := loggers.NewFileLoggerDefault()
+	key := "file_log_key"
+	err := logger.RegisterLogger(key, fileLogger)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer logger.UnregisterLogger(key)
+
 	logger.Info("Test log info message")
 
 	pattern := fmt.Sprintf("%s*%s", fileLogger.FileOptions.FilePrefix, fileLogger.FileOptions.FileExtension)
@@ -134,8 +165,8 @@ func TestAddFileLog(t *testing.T) {
 }
 
 func TestCustomizedFileLog(t *testing.T) {
-	level := levels.ErrorLevel
-	format := "***error:'%s'"
+	level := levels.Error
+	format := "file:***error:'%s'"
 	fileOptions := loggers.FileOptions{
 		Directory:     "./",
 		FilePrefix:    generateRandomString(5),
@@ -144,11 +175,14 @@ func TestCustomizedFileLog(t *testing.T) {
 
 	fileLogger := loggers.NewFileLogger(level, format, fileOptions)
 	key := "txt_file"
-	_, err := logger.RegisterLogger(key, fileLogger)
+	err := logger.RegisterLogger(key, fileLogger)
 	if err != nil {
 		t.Fatal(err)
 	}
+	defer logger.UnregisterLogger(key)
+
 	logger.DefaultLogger().Stop()
+	defer logger.DefaultLogger().Stop()
 	assert.Equal(t, fileLogger.Level, level)
 	assert.Equal(t, logger.GetLogger(key).GetLevel(), fileLogger.Level)
 	logger.Error("Test log error message")
@@ -162,7 +196,7 @@ func TestCustomizedFileLog(t *testing.T) {
 	for _, f := range logFiles {
 		content := readFileContent(t, f)
 		os.Remove(f)
-		assert.Contains(t, content, "***error:'Test log error message'")
+		assert.Contains(t, content, "file:***error:'Test log error message'")
 		assert.NotContains(t, content, "Test log info message")
 	}
 }

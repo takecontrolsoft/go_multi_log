@@ -56,51 +56,53 @@ func getMultiLog() *multiLog {
 	return mLogger
 }
 
-type fnLog func(logger loggers.LoggerInterface, level int, arg any)
-type fnLogF func(logger loggers.LoggerInterface, format string, level int, args ...interface{})
+type fnLog func(logger loggers.LoggerInterface, level levels.LogLevel, arg any)
+type fnLogF func(logger loggers.LoggerInterface, format string, level levels.LogLevel, args ...interface{})
 
-func _log(logger loggers.LoggerInterface, level int, arg any) {
+func _log(logger loggers.LoggerInterface, level levels.LogLevel, arg any) {
 	logger.Log(level, arg)
 }
 
-func _logF(logger loggers.LoggerInterface, format string, level int, args ...interface{}) {
+func _logF(logger loggers.LoggerInterface, format string, level levels.LogLevel, args ...interface{}) {
 	logger.LogF(level, format, args...)
 }
 
-func logAll(fn fnLog, level int, arg any) {
+func logAll(fn fnLog, level levels.LogLevel, arg any) {
 	mLogger = getMultiLog()
 	for _, logger := range mLogger.registered_loggers {
 		fn(logger, level, arg)
 	}
-	if level == levels.FatalLevel {
+	if level == levels.Fatal {
 		panic(arg)
 	}
 }
 
-func logFAll(fn fnLogF, format string, level int, args ...interface{}) {
+func logFAll(fn fnLogF, format string, level levels.LogLevel, args ...interface{}) {
 	mLogger = getMultiLog()
 	for _, logger := range mLogger.registered_loggers {
 		fn(logger, format, level, args...)
 	}
 }
 
-func RegisterLogger(key string, logger loggers.LoggerInterface) (loggers.LoggerInterface, error) {
+// Register an instance of an additional logger
+// that implements [loggers.LoggerInterface].
+func RegisterLogger(key string, logger loggers.LoggerInterface) error {
 	if len(key) == 0 {
-		return logger, errors.Errorf("Empty key is not allowed for registering loggers.").Err
+		return errors.Errorf("Empty key is not allowed for registering loggers.").Err
 	}
 	mLogger = getMultiLog()
 	mLogger.registered_loggers[key] = logger
-	return logger, nil
+	return nil
 }
 
-func UnregisterLogger(key string) (loggers.LoggerInterface, error) {
+func UnregisterLogger(key string) error {
 	mLogger = getMultiLog()
 	logger := mLogger.registered_loggers[key]
 	if logger == nil {
-		return nil, errors.Errorf("A logger for given key does not exists.").Err
+		return errors.Errorf("A logger for given key does not exists.").Err
 	}
 	delete(mLogger.registered_loggers, key)
-	return logger, nil
+	return nil
 }
 
 func GetLogger(key string) loggers.LoggerInterface {
@@ -114,49 +116,49 @@ func DefaultLogger() loggers.LoggerInterface {
 }
 
 func Debug(arg any) {
-	logAll(_log, levels.DebugLevel, arg)
+	logAll(_log, levels.Debug, arg)
 }
 
 func Trace(arg any) {
-	logAll(_log, levels.TraceLevel, arg)
+	logAll(_log, levels.Trace, arg)
 }
 
 func Info(arg any) {
-	logAll(_log, levels.InfoLevel, arg)
+	logAll(_log, levels.Info, arg)
 }
 
 func Warning(arg any) {
-	logAll(_log, levels.WarningLevel, arg)
+	logAll(_log, levels.Warning, arg)
 }
 
 func Error(arg any) {
-	logAll(_log, levels.ErrorLevel, arg)
+	logAll(_log, levels.Error, arg)
 }
 
 func Fatal(arg any) {
-	logAll(_log, levels.FatalLevel, arg)
+	logAll(_log, levels.Fatal, arg)
 }
 
 func DebugF(format string, args ...interface{}) {
-	logFAll(_logF, format, levels.DebugLevel, args...)
+	logFAll(_logF, format, levels.Debug, args...)
 }
 
 func TraceF(format string, args ...interface{}) {
-	logFAll(_logF, format, levels.TraceLevel, args...)
+	logFAll(_logF, format, levels.Trace, args...)
 }
 
 func InfoF(format string, args ...interface{}) {
-	logFAll(_logF, format, levels.InfoLevel, args...)
+	logFAll(_logF, format, levels.Info, args...)
 }
 
 func WarningF(format string, args ...interface{}) {
-	logFAll(_logF, format, levels.WarningLevel, args...)
+	logFAll(_logF, format, levels.Warning, args...)
 }
 
 func ErrorF(format string, args ...interface{}) {
-	logFAll(_logF, format, levels.ErrorLevel, args...)
+	logFAll(_logF, format, levels.Error, args...)
 }
 
 func FatalF(format string, args ...interface{}) {
-	logFAll(_logF, format, levels.FatalLevel, args...)
+	logFAll(_logF, format, levels.Fatal, args...)
 }
