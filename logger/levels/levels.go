@@ -13,9 +13,23 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-// Package "levels" provides constants for different log levels
-// Based on the level the logged messages could be filtered.
+// # Multiple Log GitHub repository:
+//
+// https://github.com/takecontrolsoft/go_multi_log
+//
+// # Package "levels"
+//
+// This package provides constants for different log levels.
+//
+// Based on the levels the logged messages could be filtered.
+//
 // Multiple loggers could be configured to log messages from different levels.
+//
+// # Take Control - software & infrastructure
+//
+// The package is created and maintained by "Take Control - software & infrastructure".
+//
+// Web site: https://takecontrolsoft.eu
 package levels
 
 // LogLevel type represents the supported log levels

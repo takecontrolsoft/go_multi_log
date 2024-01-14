@@ -13,8 +13,15 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-// Package "loggers" provides different implementations for loggers,
+// # Multiple Log GitHub repository:
+//
+// https://github.com/takecontrolsoft/go_multi_log
+//
+// # Package "loggers"
+//
+// This Package provides different implementations for loggers,
 // which are possible to be registered.
+//
 // The package supports:
 //   - [loggers.ConsoleLogger], which logs the messages to the console
 //   - [loggers.FileLogger], which logs the messages to files separated by goroutines.
@@ -23,6 +30,12 @@ limitations under the License.
 // makes it possible this package to be extended by implementing
 // additional custom loggers for logging in json, xml and other formats,
 // as well as sending the logs to external services.
+//
+// # Take Control - software & infrastructure
+//
+// The package is created and maintained by "Take Control - software & infrastructure".
+//
+// Web site: https://takecontrolsoft.eu
 package loggers
 
 import (
