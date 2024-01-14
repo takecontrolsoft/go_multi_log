@@ -137,7 +137,7 @@ func TestCustomizedFileLog(t *testing.T) {
 	level := levels.ErrorLevel
 	format := "***error:'%s'"
 	fileOptions := loggers.FileOptions{
-		Directory:     "../",
+		Directory:     "./",
 		FilePrefix:    generateRandomString(5),
 		FileExtension: ".txt",
 	}
@@ -163,7 +163,7 @@ func TestCustomizedFileLog(t *testing.T) {
 		content := readFileContent(t, f)
 		os.Remove(f)
 		assert.Contains(t, content, "***error:'Test log error message'")
-		assert.Contains(t, content, "Test log info message")
+		assert.NotContains(t, content, "Test log info message")
 	}
 }
 
