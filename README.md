@@ -1,4 +1,12 @@
-# go_multi_log
+
+<img src="https://takecontrolsoft.eu/wp-content/uploads/2023/11/TakeControlTransparentGreenLogo-1.png" alt="Sync Device by Take Control - software & infrastructure" width="30%">
+
+[![Web site](https://img.shields.io/badge/Web_site-takecontrolsoft.eu-pink)](https://takecontrolsoft.eu/)
+[![Linked in](https://img.shields.io/badge/Linked_In-page-blue)](https://www.linkedin.com/company/take-control-si/)
+[![Release](https://img.shields.io/github/v/release/takecontrolsoft/go_multi_log.svg)](https://github.com/takecontrolsoft/go_multi_log/releases/latest)
+[![License](https://img.shields.io/badge/License-Apache-purple)](https://www.apache.org/licenses/LICENSE-2.0)
+
+# Multiple Log (go_multi_log)
 Go package "go_multi_log" that provides logging in multiple loggers (console, file and other) with log levels.
 
 # Register **[Multiple Logger Types](#multiple-logger-types)**
@@ -92,11 +100,16 @@ logger.DefaultLogger() // will return an instance of the default logger of type 
 ```
 
 ### Console logger
-`ConsoleLogger` is set by default and it can be obtained from `logger.DefaultLogger()`. This logger can not be unregistered, but it can be stopped and resumed.
-Another customized logger instead can be registered for example to log only Debug messages using new formatting string. See the example:
 
+#### Default console log:
+`ConsoleLogger` is set by default and it can be obtained from `logger.DefaultLogger()`. This logger can not be unregistered, but it can be stopped and resumed.
 ```go
 logger.DefaultLogger().Stop()
+```
+#### Custom console log:
+Custom console log can be registered for example to log only Debug messages using new formatting string. See the example:
+
+```go
 c := loggers.NewConsoleLogger(levels.Debug, "***debug:'%s'")
 _, err := logger.RegisterLogger("debug_log_key", c)
 ```
@@ -129,5 +142,75 @@ _, err := logger.RegisterLogger("txt_file_key", f)
 	
 ```
 ### Custom logger
-Custom loggers implementations can be easily added by implementing the interface `loggers.LoggerInterface` or deriving the base class `loggers.LoggerType`, which already implements most of the function.
+Custom loggers implementations can be easily added by implementing the interface `loggers.LoggerInterface` or deriving the base class `loggers.LoggerType`, which already implements most of the function. 
+#### Implementation example: 
+* Create a new file `json_logger.go`.
+* Import `go_multi_log` package.
+```go
+import (
+	"github.com/takecontrolsoft/go_multi_log/logger/levels"
+	"github.com/takecontrolsoft/go_multi_log/logger/loggers"
+)
+```
+* Create `JsonLogger` struct.
+```go
+//json_logger.go
+
+// Define new type
+type JsonLogger struct {
+	loggers.LoggerType
+}
+
+// Create function for initializing
+func NewJsonLogger(level levels.LogLevel) *JsonLogger {
+	return &JsonLogger{
+		LoggerType: loggers.LoggerType{Level: level},
+	}
+}
+
+// Implement Log function
+func (logger *JsonLogger) Log(level levels.LogLevel, arg any) {
+	if logger.IsLogAllowed(level) {
+		// Define your format here
+		format := fmt.Sprintf("{%s: %s},", strings.ToLower(level.String()), "%v")
+		logger.LogF(level, format, arg)
+	}
+}
+
+// Implement LogF function
+func (logger *JsonLogger) LogF(level levels.LogLevel, format string, args ...interface{}) {
+	if logger.IsLogAllowed(level) {
+		// You can send the messages in Json format to an external service here
+		fmt.Printf(format, args...)
+	}
+}
+
+```
+#### Usage example: 
+
+```go
+    err := logger.RegisterLogger("json_key", NewJsonLogger(levels.Info))
+    // ... error check...
+    logger.Error("Test log error message")
+	logger.Info("Test log info message")
+
+```
+# Build source
+* Go version 1.21 is required.
+* Create and go to folder `go_multi_log`.
+* run the following commands:
+    * `git clone https://github.com/takecontrolsoft/go_multi_log.git`
+    * `go build -v ./...`
+    * `go test -v ./...`
+
+# Contribute
+See CONTRIBUTING.md for instructions about building the source.
+
+# License
+Multiple Log package ("go_multi_log") is published under the Apache License 2.0.
+
+***The "Go" name and logo are trademarks owned by Google.***
+
+
+
 
