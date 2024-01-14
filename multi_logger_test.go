@@ -123,14 +123,15 @@ func TestCustomizedConsoleLog(t *testing.T) {
 	logger.DefaultLogger().Stop()
 	defer logger.DefaultLogger().Start()
 	c := loggers.NewConsoleLogger(levels.Debug, "console:***debug:'%s'")
-	_, err := logger.RegisterLogger("debug_log_key", c)
+	key := "debug_log_key"
+	err := logger.RegisterLogger(key, c)
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer logger.UnregisterLogger("debug_log_key")
+	defer logger.UnregisterLogger(key)
 
 	assert.Equal(t, c.Level, levels.Debug)
-	assert.Equal(t, logger.GetLogger("debug_log").GetLevel(), c.Level)
+	assert.Equal(t, logger.GetLogger(key).GetLevel(), c.Level)
 	content := readConsole(func() {
 		logger.Debug("Test log debug message")
 		logger.Info("Test log info message")
@@ -142,11 +143,12 @@ func TestCustomizedConsoleLog(t *testing.T) {
 
 func TestAddFileLog(t *testing.T) {
 	fileLogger := loggers.NewFileLoggerDefault()
-	_, err := logger.RegisterLogger("file_log_key", fileLogger)
+	key := "file_log_key"
+	err := logger.RegisterLogger(key, fileLogger)
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer logger.UnregisterLogger("file_log_key")
+	defer logger.UnregisterLogger(key)
 
 	logger.Info("Test log info message")
 
@@ -173,11 +175,11 @@ func TestCustomizedFileLog(t *testing.T) {
 
 	fileLogger := loggers.NewFileLogger(level, format, fileOptions)
 	key := "txt_file"
-	_, err := logger.RegisterLogger(key, fileLogger)
+	err := logger.RegisterLogger(key, fileLogger)
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer logger.UnregisterLogger("file_log_key")
+	defer logger.UnregisterLogger(key)
 
 	logger.DefaultLogger().Stop()
 	defer logger.DefaultLogger().Stop()

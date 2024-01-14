@@ -86,23 +86,23 @@ func logFAll(fn fnLogF, format string, level levels.LogLevel, args ...interface{
 
 // Register an instance of an additional logger
 // that implements [loggers.LoggerInterface].
-func RegisterLogger(key string, logger loggers.LoggerInterface) (loggers.LoggerInterface, error) {
+func RegisterLogger(key string, logger loggers.LoggerInterface) error {
 	if len(key) == 0 {
-		return logger, errors.Errorf("Empty key is not allowed for registering loggers.").Err
+		return errors.Errorf("Empty key is not allowed for registering loggers.").Err
 	}
 	mLogger = getMultiLog()
 	mLogger.registered_loggers[key] = logger
-	return logger, nil
+	return nil
 }
 
-func UnregisterLogger(key string) (loggers.LoggerInterface, error) {
+func UnregisterLogger(key string) error {
 	mLogger = getMultiLog()
 	logger := mLogger.registered_loggers[key]
 	if logger == nil {
-		return nil, errors.Errorf("A logger for given key does not exists.").Err
+		return errors.Errorf("A logger for given key does not exists.").Err
 	}
 	delete(mLogger.registered_loggers, key)
-	return logger, nil
+	return nil
 }
 
 func GetLogger(key string) loggers.LoggerInterface {
