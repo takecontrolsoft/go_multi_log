@@ -6,7 +6,7 @@
 [![Release](https://img.shields.io/github/v/release/takecontrolsoft/go_multi_log.svg)](https://github.com/takecontrolsoft/go_multi_log/releases/latest)
 [![License](https://img.shields.io/badge/License-Apache-purple)](https://www.apache.org/licenses/LICENSE-2.0)
 
-# Multiple Log (go_multi_log)
+# Multiple Log package (go_multi_log)
 Multiple Log package "go_multi_log" for Go that provides logging in multiple loggers (console, file and other) with log levels.
 
 # Register **[Multiple Logger Types](#multiple-logger-types)**

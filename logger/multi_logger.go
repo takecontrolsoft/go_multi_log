@@ -13,15 +13,30 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-// Package github.com/takecontrolsoft/go_multi_log/logger
-// provides logging in multiple loggers (console, file and other)
-// It logs messages, objects and errors in different levels:
-// debug, trace, info, warning, error, fatal.
-// Multiple loggers could be registered.
-// loggers.ConsoleLogger and loggers.FileLogger are provided by this package.
-// Custom loggers could be implemented using the loggers.LoggerInterface.
+// # Multiple Log GitHub repository:
 //
-// (Logging a fatal message will close the application.)
+// https://github.com/takecontrolsoft/go_multi_log
+//
+// # Package "logger"
+//
+// This package provides functions for logging
+// in multiple loggers (console, file and other).
+//
+// It logs messages, objects and errors in different log levels:
+// "Debug", "Trace", "Info", "Warning", "Error" and "Fatal".
+//
+// More than one loggers could be registered at the same time.
+//
+// This package provides implementations of [loggers.ConsoleLogger]
+// and [loggers.FileLogger].
+//
+// Custom loggers could be also implemented using the [loggers.LoggerInterface].
+//
+// # Take Control - software & infrastructure
+//
+// The package is created and maintained by "Take Control - software & infrastructure".
+//
+// Web site: https://takecontrolsoft.eu
 package logger
 
 import (
@@ -95,6 +110,7 @@ func RegisterLogger(key string, logger loggers.LoggerInterface) error {
 	return nil
 }
 
+// Unregister an instance of logger by key.
 func UnregisterLogger(key string) error {
 	mLogger = getMultiLog()
 	logger := mLogger.registered_loggers[key]
@@ -105,60 +121,74 @@ func UnregisterLogger(key string) error {
 	return nil
 }
 
+// Return a registered logger instance by key.
 func GetLogger(key string) loggers.LoggerInterface {
 	mLogger = getMultiLog()
 	logger := mLogger.registered_loggers[key]
 	return logger
 }
 
+// Return the default instance of [loggers.ConsoleLogger].
 func DefaultLogger() loggers.LoggerInterface {
 	return GetLogger("")
 }
 
+// Log object in Debug level.
 func Debug(arg any) {
 	logAll(_log, levels.Debug, arg)
 }
 
+// Log object in Trace level.
 func Trace(arg any) {
 	logAll(_log, levels.Trace, arg)
 }
 
+// Log object in Info level.
 func Info(arg any) {
 	logAll(_log, levels.Info, arg)
 }
 
+// Log object in Warning level.
 func Warning(arg any) {
 	logAll(_log, levels.Warning, arg)
 }
 
+// Log object in Error level.
 func Error(arg any) {
 	logAll(_log, levels.Error, arg)
 }
 
+// Log object in Fatal level and call Panic to exit.
 func Fatal(arg any) {
 	logAll(_log, levels.Fatal, arg)
 }
 
+// Log objects using format string in Debug level.
 func DebugF(format string, args ...interface{}) {
 	logFAll(_logF, format, levels.Debug, args...)
 }
 
+// Log objects using format string in Trace level.
 func TraceF(format string, args ...interface{}) {
 	logFAll(_logF, format, levels.Trace, args...)
 }
 
+// Log objects using format string in Info level.
 func InfoF(format string, args ...interface{}) {
 	logFAll(_logF, format, levels.Info, args...)
 }
 
+// Log objects using format string in Warning level.
 func WarningF(format string, args ...interface{}) {
 	logFAll(_logF, format, levels.Warning, args...)
 }
 
+// Log objects using format string in Error level.
 func ErrorF(format string, args ...interface{}) {
 	logFAll(_logF, format, levels.Error, args...)
 }
 
+// Log objects using format string in Fatal level and call Panic to exit.
 func FatalF(format string, args ...interface{}) {
 	logFAll(_logF, format, levels.Fatal, args...)
 }
