@@ -1,0 +1,26 @@
+name: Workflow Tests
+
+on:
+  workflow_call:
+    inputs:
+      go_version:
+        description: Go version to be used for the build.
+        required: true
+        type: string   
+
+jobs:
+  build_and_tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: ${{ inputs.go_version }}
+
+    - name: Build
+      run: go build -v ./...
+
+    - name: Test
+      run: go test -v ./... 
