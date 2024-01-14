@@ -8,9 +8,10 @@
 [![License](https://img.shields.io/badge/License-Apache-purple)](https://www.apache.org/licenses/LICENSE-2.0)
 
 # Contributing
+
 Multiple Log package `go_multi_log` is an open source project. Anyone is free to make suggestions. 
-* It is required the proposals to be suggested in a Pull Requests. 
-* Merging the Pull Request to `main` branch will be possible only after having at least one Approval and all the tests checks are passed. 
+* It is required the proposals to be added into Pull Requests. 
+* Merging the Pull Requests to `main` branch will be possible only after having at least one Approval and if all the tests had been passed successfully. 
 * It is highly recommended all the changes to be covered by the test implementations.
 
 # Build source
@@ -35,6 +36,6 @@ Otherwise, when filing an issue, make sure to answer these five questions:
 # License
 Multiple Log package ("go_multi_log") is published under the Apache License 2.0.
 
-***The owner of the project is **["Take Control - software & infrastructure"](https://takecontrolsoft.eu/)*****
+***The package is created and maintained by **["Take Control - software & infrastructure"](https://takecontrolsoft.eu/)*****
 
 ***The "Go" name and logo are trademarks owned by Google.***
