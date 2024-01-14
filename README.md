@@ -7,7 +7,7 @@
 [![License](https://img.shields.io/badge/License-Apache-purple)](https://www.apache.org/licenses/LICENSE-2.0)
 
 # Multiple Log (go_multi_log)
-Go package "go_multi_log" that provides logging in multiple loggers (console, file and other) with log levels.
+Multiple Log package "go_multi_log" for Go that provides logging in multiple loggers (console, file and other) with log levels.
 
 # Register **[Multiple Logger Types](#multiple-logger-types)**
 * [Console logger](#console-logger) (defaults)
@@ -152,7 +152,7 @@ import (
 	"github.com/takecontrolsoft/go_multi_log/logger/loggers"
 )
 ```
-* Create `JsonLogger` struct.
+* Create `JsonLogger` type.
 ```go
 //json_logger.go
 
@@ -204,10 +204,12 @@ func (logger *JsonLogger) LogF(level levels.LogLevel, format string, args ...int
     * `go test -v ./...`
 
 # Contribute
-See CONTRIBUTING.md for instructions about building the source.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for instructions about building the source.
 
 # License
 Multiple Log package ("go_multi_log") is published under the Apache License 2.0.
+
+***The package is created and maintained by **["Take Control - software & infrastructure"](https://takecontrolsoft.eu/)*****
 
 ***The "Go" name and logo are trademarks owned by Google.***
 

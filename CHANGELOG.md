@@ -4,8 +4,10 @@
 ## 1.0.0 Release notes (2024-01-14)
 
 ### Enhancements
-* The initial version of Multiple Log package ("go_multi_log").
+* The initial implementation of Multiple Log package ("go_multi_log").
 
 ### Compatibility
 * Linux, Windows and Mac
 * Go lang 1.21
+
+***The package is created and maintained by **["Take Control - software & infrastructure"](https://takecontrolsoft.eu/)*****
