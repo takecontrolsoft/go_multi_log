@@ -115,7 +115,7 @@ func TestStopLog(t *testing.T) {
 
 func TestCustomizedConsoleLog(t *testing.T) {
 	logger.DefaultLogger().Stop()
-	c := loggers.NewConsoleLogger(levels.Debug, "***debug:'%s'")
+	c := loggers.NewConsoleLogger(levels.Debug, "console:***debug:'%s'")
 	_, err := logger.RegisterLogger("debug_log", c)
 	if err != nil {
 		t.Fatal(err)
@@ -128,7 +128,7 @@ func TestCustomizedConsoleLog(t *testing.T) {
 	})
 
 	assert.NotContains(t, content, "Test info log message")
-	assert.Contains(t, content, "***debug:'Test log debug message'")
+	assert.Contains(t, content, "console:***debug:'Test log debug message'")
 }
 
 func TestAddFileLog(t *testing.T) {
@@ -153,7 +153,7 @@ func TestAddFileLog(t *testing.T) {
 
 func TestCustomizedFileLog(t *testing.T) {
 	level := levels.Error
-	format := "***error:'%s'"
+	format := "file:***error:'%s'"
 	fileOptions := loggers.FileOptions{
 		Directory:     "./",
 		FilePrefix:    generateRandomString(5),
@@ -180,7 +180,7 @@ func TestCustomizedFileLog(t *testing.T) {
 	for _, f := range logFiles {
 		content := readFileContent(t, f)
 		os.Remove(f)
-		assert.Contains(t, content, "***error:'Test log error message'")
+		assert.Contains(t, content, "file:***error:'Test log error message'")
 		assert.NotContains(t, content, "Test log info message")
 	}
 }
