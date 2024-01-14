@@ -3,6 +3,7 @@
 
 [![Web site](https://img.shields.io/badge/Web_site-takecontrolsoft.eu-pink)](https://takecontrolsoft.eu/)
 [![Linked in](https://img.shields.io/badge/Linked_In-page-blue)](https://www.linkedin.com/company/take-control-si/)
+[![Documentation](https://pkg.go.dev/badge/github.com/takecontrolsoft/go_multi_log.svg)](https://pkg.go.dev/github.com/takecontrolsoft/go_multi_log)
 [![Release](https://img.shields.io/github/v/release/takecontrolsoft/go_multi_log.svg)](https://github.com/takecontrolsoft/go_multi_log/releases/latest)
 [![License](https://img.shields.io/badge/License-Apache-purple)](https://www.apache.org/licenses/LICENSE-2.0)
 
