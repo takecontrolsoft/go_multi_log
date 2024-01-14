@@ -33,9 +33,9 @@ import (
 	"github.com/takecontrolsoft/go_multi_log/logger/levels"
 )
 
-// This interface describes all the methods required to be implemented by the loggers.
+// [LoggerInterface] describes all the methods required to be implemented by the loggers.
 // Each logger, which implements this interface could be registered
-// to log messages and objects
+// to log messages and objects.
 type LoggerInterface interface {
 	Log(level levels.LogLevel, arg any)
 	LogF(level levels.LogLevel, format string, args ...interface{})
@@ -45,7 +45,7 @@ type LoggerInterface interface {
 	Stop()
 }
 
-// Provides base implementation of [loggers.LoggerInterface]
+// [LoggerType] provides base implementation of [loggers.LoggerInterface]
 // and can be reused when extending the package with adding new
 // loggers implementations.
 type LoggerType struct {

@@ -84,8 +84,8 @@ func logFAll(fn fnLogF, format string, level levels.LogLevel, args ...interface{
 	}
 }
 
-// Register an instance of an additional logger that implements
-// [loggers.LoggerInterface]
+// Register an instance of an additional logger
+// that implements [loggers.LoggerInterface].
 func RegisterLogger(key string, logger loggers.LoggerInterface) (loggers.LoggerInterface, error) {
 	if len(key) == 0 {
 		return logger, errors.Errorf("Empty key is not allowed for registering loggers.").Err

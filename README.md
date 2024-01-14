@@ -8,9 +8,9 @@ The function `Fatal` logs the messages and then calls `panic`. It can be used fo
 # Imports
 ```go
 import (	
-    "github.com/takecontrolsoft/go_multi_log/levels"
-	"github.com/takecontrolsoft/go_multi_log/logger"
-	"github.com/takecontrolsoft/go_multi_log/loggers"
+    "github.com/takecontrolsoft/go_multi_log/logger"
+	"github.com/takecontrolsoft/go_multi_log/logger/levels"
+	"github.com/takecontrolsoft/go_multi_log/logger/loggers"
 )
 ````	
 # Usage
