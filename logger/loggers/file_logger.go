@@ -33,6 +33,9 @@ type FileLogger struct {
 
 // Represent a set of file options,
 // which are used when the log file name is generated.
+//   - Directory - an absolute or relative path to log files location where the process has write access.
+//   - FilePrefix - should be a short string of symbols allowed for OS file names.
+//   - FileExtension - should starts with ".".
 type FileOptions struct {
 	Directory, FilePrefix, FileExtension string
 }
@@ -40,9 +43,9 @@ type FileOptions struct {
 // Returns an instance of [FileLogger] with
 // default log level "Info".
 // Default [FileOptions] are used:
+//   - Directory: current executable directory.
 //   - FilePrefix:  "sync_server"
 //   - FileExtension:  ".log"
-//   - Directory: current executable directory.
 func NewFileLoggerDefault() *FileLogger {
 	return &FileLogger{
 		LoggerType:  LoggerType{Level: levels.Info},

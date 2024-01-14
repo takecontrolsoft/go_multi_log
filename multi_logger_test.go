@@ -113,6 +113,24 @@ func TestStopLog(t *testing.T) {
 	assert.Contains(t, content, "INFO: [Test info log message 2]")
 }
 
+func TestCustomizedConsoleLog(t *testing.T) {
+	logger.DefaultLogger().Stop()
+	c := loggers.NewConsoleLogger(levels.Debug, "***debug:'%s'")
+	_, err := logger.RegisterLogger("debug_log", c)
+	if err != nil {
+		t.Fatal(err)
+	}
+	assert.Equal(t, c.Level, levels.Debug)
+	assert.Equal(t, logger.GetLogger("debug_log").GetLevel(), c.Level)
+	content := readConsole(func() {
+		logger.Debug("Test log debug message")
+		logger.Info("Test log info message")
+	})
+
+	assert.NotContains(t, content, "Test info log message")
+	assert.Contains(t, content, "***debug:'Test log debug message'")
+}
+
 func TestAddFileLog(t *testing.T) {
 	fileLogger := loggers.NewFileLoggerDefault()
 	_, err := logger.RegisterLogger("file", fileLogger)
