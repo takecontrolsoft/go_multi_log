@@ -13,14 +13,40 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+// Package "levels" provides constants for different log levels
+// Based on the level the logged messages could be filtered.
+// Multiple loggers could be configured to log messages from different levels.
 package levels
 
+// LogLevel type represents the supported log levels
+type LogLevel int
+
 const (
-	AllLevels    int = 0
-	DebugLevel   int = 1
-	TraceLevel   int = 2
-	InfoLevel    int = 3
-	WarningLevel int = 4
-	ErrorLevel   int = 5
-	FatalLevel   int = 6
+	All     LogLevel = 0
+	Debug   LogLevel = 1
+	Trace   LogLevel = 2
+	Info    LogLevel = 3
+	Warning LogLevel = 4
+	Error   LogLevel = 5
+	Fatal   LogLevel = 6
 )
+
+// Converts to string the name of the LogLevel value
+func (level LogLevel) String() string {
+	switch level {
+	case Debug:
+		return "Debug"
+	case Trace:
+		return "Trace"
+	case Info:
+		return "Info"
+	case Warning:
+		return "Warning"
+	case Error:
+		return "Error"
+	case Fatal:
+		return "Fatal"
+	default:
+		return "Unknown"
+	}
+}

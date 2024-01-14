@@ -28,24 +28,24 @@ type ConsoleLogger struct {
 
 func NewConsoleLoggerDefault() *ConsoleLogger {
 	return &ConsoleLogger{
-		LoggerType: LoggerType{Level: levels.InfoLevel},
+		LoggerType: LoggerType{Level: levels.Info},
 	}
 }
 
-func NewConsoleLogger(level int, format string) *ConsoleLogger {
+func NewConsoleLogger(level levels.LogLevel, format string) *ConsoleLogger {
 	return &ConsoleLogger{
 		LoggerType: LoggerType{Level: level, Format: format},
 	}
 }
 
-func (logger *ConsoleLogger) Log(level int, arg any) {
+func (logger *ConsoleLogger) Log(level levels.LogLevel, arg any) {
 	if logger.IsLogAllowed(level) {
 		log.SetOutput(os.Stdout)
 		logger.multi_log(level, arg)
 	}
 }
 
-func (logger *ConsoleLogger) LogF(level int, format string, args ...interface{}) {
+func (logger *ConsoleLogger) LogF(level levels.LogLevel, format string, args ...interface{}) {
 	if logger.IsLogAllowed(level) {
 		log.SetOutput(os.Stdout)
 		logger.multi_logF(level, format, args...)

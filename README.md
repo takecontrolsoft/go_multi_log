@@ -8,9 +8,9 @@ The function `Fatal` logs the messages and then calls `panic`. It can be used fo
 # Imports
 ```go
 import (	
-    "github.com/takecontrolsoft/go_multi_log/logger"
-    "github.com/takecontrolsoft/go_multi_log/logger/levels"
-    "github.com/takecontrolsoft/go_multi_log/logger/loggers"
+    "github.com/takecontrolsoft/go_multi_log/levels"
+	"github.com/takecontrolsoft/go_multi_log/logger"
+	"github.com/takecontrolsoft/go_multi_log/loggers"
 )
 ````	
 # Usage
@@ -50,11 +50,11 @@ logger.InfoF("Person: %v, Car: %v", person, car)
 ```
 
 ## Change log level
-To change the default log level use `SetLevel(levels.AllLevels)`. This will cause all the messages for levels greater or equal to the new level also to be logged. The level is changed for the whole application. Avoid changing the level inside Goroutine (go lightweight thread).
+To change the default log level use `SetLevel(levels.All)`. This will cause all the messages for levels greater or equal to the new level also to be logged. The level is changed for the whole application. Avoid changing the level inside Goroutine (go lightweight thread).
        
 ```go
 currentLevel:= logger.DefaultLogger().GetLevel()
-logger.DefaultLogger().SetLevel(levels.AllLevels)
+logger.DefaultLogger().SetLevel(levels.All)
 logger.Debug("Test debug log message")
 logger.Trace("Test trace log message")
 ```

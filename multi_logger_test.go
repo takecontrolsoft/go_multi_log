@@ -63,7 +63,7 @@ func TestAllLogs(t *testing.T) {
 }
 
 func TestLogFormattedObject(t *testing.T) {
-	logger.DefaultLogger().SetLevel(levels.AllLevels)
+	logger.DefaultLogger().SetLevel(levels.All)
 	content := readConsole(func() {
 		person := person{Name: "Michael"}
 		logger.DebugF("Person: %v, Car: %v", person, car{Year: "2020"})
@@ -81,7 +81,7 @@ func TestLogFormattedObject(t *testing.T) {
 }
 
 func TestLogLevels(t *testing.T) {
-	logger.DefaultLogger().SetLevel(levels.TraceLevel)
+	logger.DefaultLogger().SetLevel(levels.Trace)
 	content := readConsole(func() {
 		logger.Debug("Test debug log message")
 		logger.Trace("Test trace log message")
@@ -134,7 +134,7 @@ func TestAddFileLog(t *testing.T) {
 }
 
 func TestCustomizedFileLog(t *testing.T) {
-	level := levels.ErrorLevel
+	level := levels.Error
 	format := "***error:'%s'"
 	fileOptions := loggers.FileOptions{
 		Directory:     "./",

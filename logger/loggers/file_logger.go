@@ -25,6 +25,7 @@ import (
 	"github.com/timandy/routine"
 )
 
+// A FileLogger is safe for concurrent use by multiple goroutines
 type FileLogger struct {
 	LoggerType
 	FileOptions
@@ -36,19 +37,19 @@ type FileOptions struct {
 
 func NewFileLoggerDefault() *FileLogger {
 	return &FileLogger{
-		LoggerType:  LoggerType{Level: levels.InfoLevel},
+		LoggerType:  LoggerType{Level: levels.Info},
 		FileOptions: FileOptions{FilePrefix: "sync_server", FileExtension: ".log"},
 	}
 }
 
-func NewFileLogger(level int, format string, options FileOptions) *FileLogger {
+func NewFileLogger(level levels.LogLevel, format string, options FileOptions) *FileLogger {
 	return &FileLogger{
 		LoggerType:  LoggerType{Level: level, Format: format},
 		FileOptions: options,
 	}
 }
 
-func (logger *FileLogger) Log(level int, arg any) {
+func (logger *FileLogger) Log(level levels.LogLevel, arg any) {
 	if logger.IsLogAllowed(level) {
 		fLog := setFileLog(logger)
 		defer fLog.Close()
@@ -56,7 +57,7 @@ func (logger *FileLogger) Log(level int, arg any) {
 	}
 }
 
-func (logger *FileLogger) LogF(level int, format string, args ...interface{}) {
+func (logger *FileLogger) LogF(level levels.LogLevel, format string, args ...interface{}) {
 	if logger.IsLogAllowed(level) {
 		fLog := setFileLog(logger)
 		defer fLog.Close()
