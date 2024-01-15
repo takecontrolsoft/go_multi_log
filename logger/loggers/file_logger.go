@@ -49,7 +49,7 @@ type FileOptions struct {
 func NewFileLoggerDefault() *FileLogger {
 	return &FileLogger{
 		LoggerType:  LoggerType{Level: levels.Info},
-		FileOptions: FileOptions{FilePrefix: "sync_server", FileExtension: ".log"},
+		FileOptions: FileOptions{FilePrefix: "mLog", FileExtension: ".log"},
 	}
 }
 

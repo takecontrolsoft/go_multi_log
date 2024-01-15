@@ -7,10 +7,10 @@
 [![Release](https://img.shields.io/github/v/release/takecontrolsoft/go_multi_log.svg)](https://github.com/takecontrolsoft/go_multi_log/releases/latest)
 [![License](https://img.shields.io/badge/License-Apache-purple)](https://www.apache.org/licenses/LICENSE-2.0)
 
-# Multiple Log package (go_multi_log)
-Multiple Log package "go_multi_log" for Go that provides logging in multiple loggers (console, file and other) with log levels.
+# Multi Logs package (go_multi_log)
+Multi Logs package "go_multi_log" is a Go package that provides logging with multiple loggers (console, file and custom loggers) with different log levels.
 
-# Register **[Multiple Logger Types](#multiple-logger-types)**
+# [Multi Loggers Types](#multi-loggers-types)
 * [Console logger](#console-logger) (defaults)
 * [File logger](#file-logger)
 * [Custom logger](#custom-logger)
@@ -23,8 +23,8 @@ Multiple Log package "go_multi_log" for Go that provides logging in multiple log
 ```go
 import (	
     "github.com/takecontrolsoft/go_multi_log/logger"
-	"github.com/takecontrolsoft/go_multi_log/logger/levels"
-	"github.com/takecontrolsoft/go_multi_log/logger/loggers"
+    "github.com/takecontrolsoft/go_multi_log/logger/levels"
+    "github.com/takecontrolsoft/go_multi_log/logger/loggers"
 )
 ````	
 ## Usage
@@ -34,13 +34,15 @@ import (
     logger.Info("Test info log message")
     logger.Warning("Test warning log message")
     logger.Error("Test error log message")
-    logger.Fatal("Test log fatal message") // The function Fatal logs the messages and then calls Panic.
+    logger.Fatal("Test log fatal message")
 ```
 
 ### Log error object:
 ```go
 err := callFunction()
-logger.Error(err)
+if err!=nil{
+    logger.Error(err)
+}
 ```
 ### Log any object
 
@@ -83,27 +85,32 @@ logger.DefaultLogger().Start()
 logger.Info("Message 2")		
 ```
 
-## Multiple Logger Types
+## Multi Loggers Types
 
 ### Manage loggers
 Use the following functions to **register**, **unregister** or **get** loggers by key. One **default logger** always exists and can not be unregistered, but can be stopped.
 
 ```go
-key:="new_logger_key" // where the key must be unique, because more than one instances of the same logger type can be registered.
+key:="new_logger_key" 
+// where the key must be unique, because more than one instances of the same logger type can be registered.
 
-logger.RegisterLogger(key, logger) // where `logger` implements `loggers.LoggerInterface` and can support different log levels and log destinations.
+logger.RegisterLogger(key, logger) 
+// where `logger` implements `loggers.LoggerInterface` and can support different log levels and log destinations.
 
-logger.GetLogger(key) // will return an instance of the logger by key.
+logger.GetLogger(key) 
+// will return an instance of the logger by key.
 
-logger.UnregisterLogger(key) // will delete a specific logger from the collection with registered loggers.
+logger.UnregisterLogger(key) 
+// will delete a specific logger from the collection with registered loggers.
 
-logger.DefaultLogger() // will return an instance of the default logger of type `ConsoleLogger`
+logger.DefaultLogger() 
+// will return an instance of the default logger of type `ConsoleLogger`
 ```
 
 ### Console logger
 
 #### Default console log:
-`ConsoleLogger` is set by default and it can be obtained from `logger.DefaultLogger()`. This logger can not be unregistered, but it can be stopped and resumed.
+A simple `ConsoleLogger` is set by default and it can be obtained from `logger.DefaultLogger()`. This logger can not be unregistered, but it can be stopped and resumed.
 ```go
 logger.DefaultLogger().Stop()
 ```
@@ -118,11 +125,11 @@ _, err := logger.RegisterLogger("debug_log_key", c)
 ### File logger
 `FileLogger` can be added as an additional logger to prints the messages to files. 
 #### Use `NewFileLoggerDefault` to initialize the file logger with the default settings.
-   * Default [LogLevel] is levels.Info.
-   * Default [FileOptions] are used:
-        * FilePrefix:  "sync_server".
+   * Default LogLevel is levels.Info.
+   * Default FileOptions are used:        
+        * Directory: current executable directory.
+        * FilePrefix:  "mLog".
         * FileExtension:  ".log".
-        * *Directory: current executable directory.
 ```go
 f := loggers.NewFileLoggerDefault()
 _, err := logger.RegisterLogger("file_logger_key", f)
@@ -134,7 +141,7 @@ level := levels.Error
 format := "***error:'%s'"
 fileOptions := loggers.FileOptions{
     Directory:     "./",
-    FilePrefix:    generateRandomString(5),
+    FilePrefix:    "tLog",
     FileExtension: ".txt",
 }
 
@@ -190,12 +197,12 @@ func (logger *JsonLogger) LogF(level levels.LogLevel, format string, args ...int
 #### Usage example: 
 
 ```go
-    err := logger.RegisterLogger("json_key", NewJsonLogger(levels.Info))
-    // ... error check...
-    logger.Error("Test log error message")
-	logger.Info("Test log info message")
-
+ err := logger.RegisterLogger("json_key", NewJsonLogger(levels.Info))
+ // ... error check...
+ logger.Error("Test log error message")
+ logger.Info("Test log info message")
 ```
+
 # Build source
 * Go version 1.21 is required.
 * Create and go to folder `go_multi_log`.
@@ -208,7 +215,7 @@ func (logger *JsonLogger) LogF(level levels.LogLevel, format string, args ...int
 See [CONTRIBUTING.md](CONTRIBUTING.md) for instructions about building the source.
 
 # License
-Multiple Log package ("go_multi_log") is published under the Apache License 2.0.
+Multi Logs package ("go_multi_log") is published under the Apache License 2.0.
 
 ***The package is created and maintained by **["Take Control - software & infrastructure"](https://takecontrolsoft.eu/)*****
 
