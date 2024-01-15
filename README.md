@@ -7,10 +7,10 @@
 [![Release](https://img.shields.io/github/v/release/takecontrolsoft/go_multi_log.svg)](https://github.com/takecontrolsoft/go_multi_log/releases/latest)
 [![License](https://img.shields.io/badge/License-Apache-purple)](https://www.apache.org/licenses/LICENSE-2.0)
 
-# Multi Logs package (go_multi_log)
-Multi Logs package "go_multi_log" is a Go package that provides logging with multiple loggers (console, file and custom loggers) with different log levels.
+# Multiple Logs package (go_multi_log)
+Multiple Logs package "go_multi_log" is a Go package that provides logging with multiple loggers (console, file and custom loggers) with different log levels.
 
-# [Multi Loggers Types](#multi-loggers-types)
+# Register [Multiple Logger Types](#multiple-logger-types)
 * [Console logger](#console-logger) (defaults)
 * [File logger](#file-logger)
 * [Custom logger](#custom-logger)
@@ -85,7 +85,7 @@ logger.DefaultLogger().Start()
 logger.Info("Message 2")		
 ```
 
-## Multi Loggers Types
+## Multiple Logger Types
 
 ### Manage loggers
 Use the following functions to **register**, **unregister** or **get** loggers by key. One **default logger** always exists and can not be unregistered, but can be stopped.
@@ -215,7 +215,7 @@ func (logger *JsonLogger) LogF(level levels.LogLevel, format string, args ...int
 See [CONTRIBUTING.md](CONTRIBUTING.md) for instructions about building the source.
 
 # License
-Multi Logs package ("go_multi_log") is published under the Apache License 2.0.
+Multiple Logs package ("go_multi_log") is published under the Apache License 2.0.
 
 ***The package is created and maintained by **["Take Control - software & infrastructure"](https://takecontrolsoft.eu/)*****
 

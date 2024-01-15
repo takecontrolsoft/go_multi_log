@@ -13,7 +13,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-// # Multi Logs GitHub repository:
+// # Multiple Logs GitHub repository:
 //
 // https://github.com/takecontrolsoft/go_multi_log
 //
