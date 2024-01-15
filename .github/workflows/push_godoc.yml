@@ -1,4 +1,4 @@
-name: Release
+name: PushGoDoc
 on:
   release:
     types:

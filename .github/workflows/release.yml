@@ -45,6 +45,6 @@ jobs:
             release_name: ${{ github.ref }}
             body_path: CHANGELOG.md
             draft: false
-            prerelease: true   
+            prerelease: false   
         
     
