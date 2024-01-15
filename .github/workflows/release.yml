@@ -47,4 +47,11 @@ jobs:
             draft: false
             prerelease: false   
         
-    
+    go_get_package:
+      name: Refresh new go package version
+      needs: release
+      secrets: inherit
+      uses: ./.github/workflows/w_goget.yml
+      with:
+        go_version: 1.21
+        version: ${{ needs.release.outputs.v_num }}

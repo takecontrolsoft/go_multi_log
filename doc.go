@@ -1,6 +1,6 @@
-// # Multi Logs package (go_multi_log)
+// # Multiple Logs package (go_multi_log)
 //
-// Multi Logs package "go_multi_log" is Go package
+// Multiple Logs package "go_multi_log" is Go package
 // that provides logging in multiple loggers (console, file and other) with log levels.
 //
 // # GitHub repository:

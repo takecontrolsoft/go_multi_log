@@ -10,7 +10,7 @@
 
 # Contributing
 
-Multi Logs package `go_multi_log` is an open source project. Anyone is free to make suggestions. 
+Multiple Logs package `go_multi_log` is an open source project. Anyone is free to make suggestions. 
 * It is required the proposals to be added into Pull Requests. 
 * Merging the Pull Requests to `main` branch will be possible only after having at least one Approval and if all the tests had been passed successfully. 
 * It is highly recommended all the changes to be covered by tests implementation.
@@ -35,7 +35,7 @@ Otherwise, when filing an issue, make sure to answer these questions:
 * What device, operating system and processor architecture are you using?
 
 # License
-Multi Logs package ("go_multi_log") is published under the Apache License 2.0.
+Multiple Logs package ("go_multi_log") is published under the Apache License 2.0.
 
 ***The package is created and maintained by **["Take Control - software & infrastructure"](https://takecontrolsoft.eu/)*****
 

@@ -1,0 +1,29 @@
+name: Workflow GoGet
+on:
+  workflow_call:
+    inputs:
+      go_version:
+        description: Go version to be used for the build.
+        required: true
+        type: string 
+      version:
+        description: Released version to pull.
+        required: true
+        type: string   
+   
+jobs:
+  get_package:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: ${{ inputs.go_version }}
+    - name: Get
+      run: go get github.com/takecontrolsoft/go_multi_log@${{ inputs.version }}
+
+     
+        
+    
