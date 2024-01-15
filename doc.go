@@ -1,6 +1,6 @@
-// # Multiple Log package (go_multi_log)
+// # Multi Logs package (go_multi_log)
 //
-// Multiple Log package "go_multi_log" is Go package
+// Multi Logs package "go_multi_log" is Go package
 // that provides logging in multiple loggers (console, file and other) with log levels.
 //
 // # GitHub repository:
@@ -40,7 +40,9 @@
 // - Log error object:
 //
 //	err := callFunction()
-//	logger.Error(err)
+//	if err!=nil{
+//		logger.Error(err)
+//	}
 //
 // - Log any object
 //
@@ -81,7 +83,7 @@
 //	logger.DefaultLogger().Start()
 //	logger.Info("Message 2")
 //
-// # Manage Multiple Logger Types
+// # Manage Multiple Loggers Types
 //
 // Use the following functions to register, unregister or get loggers by key. One default logger always exists and can not be unregistered, but can be stopped.
 //
@@ -99,7 +101,7 @@
 //
 // - Default console log:
 //
-// "ConsoleLogger" is set by default and it can be obtained from "logger.DefaultLogger()". This logger can not be unregistered, but it can be stopped and resumed.
+// A simple "ConsoleLogger" is set by default and it can be obtained from "logger.DefaultLogger()". This logger can not be unregistered, but it can be stopped and resumed.
 //
 //	logger.DefaultLogger().Stop()
 //
@@ -120,11 +122,11 @@
 //
 //   - Default [FileOptions] are used:
 //
-//   - FilePrefix:  "sync_server".
+//   - Directory: current executable directory.
+//
+//   - FilePrefix:  "mLog".
 //
 //   - FileExtension:  ".log".
-//
-//   - Directory: current executable directory.
 //
 // Example:
 //
@@ -138,7 +140,7 @@
 //
 //	fileOptions := loggers.FileOptions{
 //	    Directory:     "./",
-//	    FilePrefix:    generateRandomString(5),
+//	    FilePrefix:    "mLog",
 //	    FileExtension: ".txt",
 //	}
 //
