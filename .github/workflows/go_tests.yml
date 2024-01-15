@@ -15,7 +15,7 @@ jobs:
     name: Test go_multi_log
     secrets: inherit
     with:
-      go_version: ${{ vars.GO_VERSION }}
+      go_version: 1.21
     uses: ./.github/workflows/w_tests.yml
 
 

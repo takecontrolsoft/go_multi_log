@@ -1,0 +1,15 @@
+name: Release
+on:
+  release:
+    types:
+      - created
+
+jobs:
+  build:
+    name: Renew documentation
+    runs-on: ubuntu-latest
+    steps:
+    - name: Pull new module version
+      uses: andrewslotin/go-proxy-pull-action@master
+        
+    
