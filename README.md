@@ -2,9 +2,10 @@
 <img src="https://takecontrolsoft.eu/wp-content/uploads/2023/11/TakeControlTransparentGreenLogo-1.png" alt="Sync Device by Take Control - software & infrastructure" width="30%">
 
 [![Web site](https://img.shields.io/badge/Web_site-takecontrolsoft.eu-pink)](https://takecontrolsoft.eu/)
-[![Linked in](https://img.shields.io/badge/Linked_In-page-blue)](https://www.linkedin.com/company/take-control-si/)
+[![Discord](https://img.shields.io/badge/Discord-Chat-lightgrey?style=flat&logo=discord)](https://discord.gg/GyxGznbC)
+[![Linked in](https://img.shields.io/badge/Linked_In-page-blue?style=flat&logo=linkedin)](https://www.linkedin.com/company/take-control-si/)
 [![Documentation](https://pkg.go.dev/badge/github.com/takecontrolsoft/go_multi_log.svg)](https://pkg.go.dev/github.com/takecontrolsoft/go_multi_log)
-[![Release](https://img.shields.io/github/v/release/takecontrolsoft/go_multi_log.svg)](https://github.com/takecontrolsoft/go_multi_log/releases/latest)
+[![Release](https://img.shields.io/github/v/release/takecontrolsoft/go_multi_log.svg?style=flat&logo=github)](https://github.com/takecontrolsoft/go_multi_log/releases/latest)
 [![License](https://img.shields.io/badge/License-Apache-purple)](https://www.apache.org/licenses/LICENSE-2.0)
 
 # Multiple Logs package (go_multi_log)
