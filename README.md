@@ -119,7 +119,7 @@ Custom console log can be registered for example to log only Debug messages usin
 
 ```go
 c := loggers.NewConsoleLogger(levels.Debug, "***debug:'%s'")
-_, err := logger.RegisterLogger("debug_log_key", c)
+err := logger.RegisterLogger("debug_log_key", c)
 ```
 
 ### File logger
@@ -132,7 +132,7 @@ _, err := logger.RegisterLogger("debug_log_key", c)
         * FileExtension:  ".log".
 ```go
 f := loggers.NewFileLoggerDefault()
-_, err := logger.RegisterLogger("file_logger_key", f)
+err := logger.RegisterLogger("file_logger_key", f)
 ```
 
 #### Use `NewFileLogger` to initialize the file logger with the customized settings.
@@ -146,7 +146,7 @@ fileOptions := loggers.FileOptions{
 }
 
 f := loggers.NewFileLogger(level, format, fileOptions)
-_, err := logger.RegisterLogger("txt_file_key", f)
+err := logger.RegisterLogger("txt_file_key", f)
 	
 ```
 ### Custom logger
