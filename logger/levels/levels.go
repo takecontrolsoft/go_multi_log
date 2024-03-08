@@ -48,6 +48,8 @@ const (
 // Converts to string the name of the LogLevel value
 func (level LogLevel) String() string {
 	switch level {
+	case All:
+		return "All"
 	case Debug:
 		return "Debug"
 	case Trace:

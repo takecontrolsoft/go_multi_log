@@ -110,7 +110,7 @@
 // Custom console log can be registered for example to log only Debug messages using new formatting string. See the example:
 //
 //	c := loggers.NewConsoleLogger(levels.Debug, "***debug:'%s'")
-//	_, err := logger.RegisterLogger("debug_log_key", c)
+//	err := logger.RegisterLogger("debug_log_key", c)
 //
 // # File logger
 //
@@ -131,7 +131,7 @@
 // Example:
 //
 //	f := loggers.NewFileLoggerDefault()
-//	_, err := logger.RegisterLogger("file_logger_key", f)
+//	err := logger.RegisterLogger("file_logger_key", f)
 //
 // - Use "NewFileLogger" to initialize the file logger with the customized settings.
 //
@@ -145,7 +145,7 @@
 //	}
 //
 //	f := loggers.NewFileLogger(level, format, fileOptions)
-//	_, err := logger.RegisterLogger("txt_file_key", f)
+//	err := logger.RegisterLogger("txt_file_key", f)
 //
 // # Custom loggers
 //
