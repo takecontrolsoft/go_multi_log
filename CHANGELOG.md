@@ -1,4 +1,4 @@
-<img src="https://takecontrolsoft.eu/wp-content/uploads/2023/11/TakeControlTransparentGreenLogo-1.png" alt="Take Control - software & infrastructure" width="25%">
+<img src="https://takecontrolsoft.eu/assets/img/takecontrolsoft-logo-green.png" alt="Take Control - software & infrastructure" width="25%">
 
 ***Multiple Logs package (go_multi_log) published on:***
 *   https://pkg.go.dev/github.com/takecontrolsoft/go_multi_log
