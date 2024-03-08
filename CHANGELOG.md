@@ -3,7 +3,7 @@
 ***Multiple Logs package (go_multi_log) published on:***
 *   https://pkg.go.dev/github.com/takecontrolsoft/go_multi_log
 
-## 1.0.2 Release notes (NEXT RELEASE)
+## 1.0.2 Release notes
 ### Enhancements
 * Updated code samples.
 
