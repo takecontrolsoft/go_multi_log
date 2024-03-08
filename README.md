@@ -1,5 +1,5 @@
 
-<img src="https://takecontrolsoft.eu/wp-content/uploads/2023/11/TakeControlTransparentGreenLogo-1.png" alt="Sync Device by Take Control - software & infrastructure" width="30%">
+<img src="https://takecontrolsoft.eu/assets/img/takecontrolsoft-logo-green.png" alt="Sync Device by Take Control - software & infrastructure" width="30%">
 
 [![Web site](https://img.shields.io/badge/Web_site-takecontrolsoft.eu-pink)](https://takecontrolsoft.eu/)
 [![Discord](https://img.shields.io/badge/Discord-Chat-lightgrey?style=flat&logo=discord)](https://discord.gg/GyxGznbC)
