@@ -30,6 +30,7 @@ limitations under the License.
 // The package is created and maintained by "Take Control - software & infrastructure".
 //
 // Web site: https://takecontrolsoft.eu
+
 package levels
 
 // LogLevel type represents the supported log levels
