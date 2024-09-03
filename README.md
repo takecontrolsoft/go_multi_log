@@ -38,6 +38,10 @@ import (
     logger.Fatal("Test log fatal message")
 ```
 
+
+### To force update to a specific commit use
+`go get -u "github.com/takecontrolsoft/go_multi_log@{commit hash}"`
+
 ### Log error object:
 ```go
 err := callFunction()

@@ -3,7 +3,7 @@
 ***Multiple Logs package (go_multi_log) published on:***
 *   https://pkg.go.dev/github.com/takecontrolsoft/go_multi_log
 
-## 2.0.0 Release notes (2024-08-19)
+## 2.0.0 Release notes (2024-09-03)
 ### Breaking changes
 * Removed public packages loggers, levels and logger.
 * Updated packages.
